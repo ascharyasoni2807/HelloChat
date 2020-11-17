@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello/pages/chatroom.dart';
 import 'package:hello/pages/sigin.dart';
 import 'package:hello/pages/signup.dart';
 
@@ -12,7 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        initialRoute: "/signup",
-        routes: {"/": (context) => SignIn(), "/signup": (context) => SignUP()});
+        initialRoute: "chatroom",
+        routes: {
+          "/": (context) => SignIn(),
+          "/signup": (context) => SignUP(),
+          "chatroom": (context) => ChatRoom(),
+        });
   }
 }

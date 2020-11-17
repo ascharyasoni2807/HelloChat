@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello/pages/appbar.dart';
+import 'package:hello/pages/sigin.dart';
 import 'package:hello/services/auth.dart';
 import 'package:hello/pages/chatroom.dart';
 
@@ -154,12 +155,20 @@ class _SignUPState extends State<SignUP> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Already have an account?",
+                            "Already have an account? ",
                           ),
-                          Text(
-                            "Sign In Now",
-                            style:
-                                TextStyle(decoration: TextDecoration.underline),
+                          InkWell(
+                            child: Text(
+                              " Sign In Now",
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline),
+                            ),
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignIn()));
+                            },
                           )
                         ],
                       ),

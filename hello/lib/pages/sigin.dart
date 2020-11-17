@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hello/pages/appbar.dart';
+import 'package:hello/pages/signup.dart';
 //import 'package:google_fonts/google_fonts.dart';
 
 class SignIn extends StatefulWidget {
+  //final Function toggle;
+  //SignIn();
   @override
   _SignInState createState() => _SignInState();
 }
@@ -84,10 +87,18 @@ class _SignInState extends State<SignIn> {
                     Text(
                       "Dont have an account?",
                     ),
-                    Text(
-                      "Register Now",
-                      style: TextStyle(decoration: TextDecoration.underline),
-                    )
+
+                    //  padding: EdgeInsets.symmetric(vertical: 8),
+                    InkWell(
+                      child: Text(
+                        " Register Now",
+                        style: TextStyle(decoration: TextDecoration.underline),
+                      ),
+                      onTap: () {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => SignUP()));
+                      },
+                    ),
                   ],
                 ),
               ],
