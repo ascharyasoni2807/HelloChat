@@ -7,10 +7,16 @@ class SignUP extends StatefulWidget {
 }
 
 class _SignUPState extends State<SignUP> {
+  final formkey = GlobalKey<FormState>();
+
   TextEditingController userNameTextEditingController =
       new TextEditingController();
   TextEditingController emailTextEditing = new TextEditingController();
   TextEditingController passwordTextEditing = new TextEditingController();
+
+  signselfUP() {
+    if (formkey.currentState.validate()) {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,36 +31,46 @@ class _SignUPState extends State<SignUP> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 40),
-                TextField(
-                  controller: userNameTextEditingController,
-                  decoration: textFieldDecoration('Enter username', 'Username'),
-                  // keyboardType: TextInputType.emailAddress,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: emailTextEditing,
-                  decoration: textFieldDecoration('Enter Email', 'Email'),
-                  // keyboardType: TextInputType.emailAddress,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: passwordTextEditing,
-                  decoration: textFieldDecoration('Enter password', 'Password'),
-                  // keyboardType: TextInputType.emailAddress,
-                ),
-                SizedBox(
-                  height: 8,
+                Form(
+                  key: formkey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        validator: (value) {
+                          return value.isEmpty || value.length < 6
+                              ? "Username min of 6 characters"
+                              : null;
+                        },
+                        controller: userNameTextEditingController,
+                        decoration:
+                            textFieldDecoration('Enter username', 'Username'),
+                        // keyboardType: TextInputType.emailAddress,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        controller: emailTextEditing,
+                        decoration: textFieldDecoration('Enter Email', 'Email'),
+                        // keyboardType: TextInputType.emailAddress,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        controller: passwordTextEditing,
+                        decoration:
+                            textFieldDecoration('Enter password', 'Password'),
+                        // keyboardType: TextInputType.emailAddress,
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                   alignment: Alignment.centerRight,
                   child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                       child: Text("Forgot Password?")),
                 ),
                 SizedBox(
