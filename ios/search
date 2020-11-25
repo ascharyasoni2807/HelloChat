@@ -1,0 +1,170 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:hello/pages/appbar.dart';
+import 'package:hello/services/database.dart';
+import 'package:hello/pages/chatscreen.dart';
+import 'package:hello/navigation/savedata.dart';
+
+class Searchscreen extends StatefulWidget {
+  @override
+  _SearchscreenState createState() => _SearchscreenState();
+}
+
+class _SearchscreenState extends State<Searchscreen> {
+  TextEditingController searchtextedit = new TextEditingController();
+  DatabaseMethods databaseMethods = new DatabaseMethods();
+  QuerySnapshot searchSnapshot;
+
+  searchinitiate() {
+    databaseMethods.getUserByUsername(searchtextedit.text).then((value) {
+      print(value.toString());
+      setState(() {
+        searchSnapshot = value;
+      });
+    });
+  }
+
+  Widget searchList() {
+    return searchSnapshot != null
+        ? ListView.builder(
+            itemCount: searchSnapshot.docs.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return SearchTile(
+                userName: searchSnapshot.docs[index].data()["name"],
+                userEmail: searchSnapshot.docs[index].data()["email"],
+              );
+            })
+        : Container();
+  }
+
+  /* createroomstartchat({String userName}) {
+    if (userName != Constants.myName) {
+      String chatRoomId = getChatRoomId(userName, Constants.myName);
+
+      List<String> users = [userName, Constants.myName];
+      Map<String, dynamic> chatRoomMap = {
+        "users": users,
+        "chatroomid": chatRoomId,
+      };
+
+      DatabaseMethods().createChatroom(chatRoomId, chatRoomMap);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Chatscreen(),
+          ));
+    } else {
+      print("cant send message to self");
+    }
+  }*/
+
+  //Widget SearchTile({String userName, String userEmail}) {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: appBarMain(context),
+      body: Container(
+          child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 5,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.white12,
+                border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(20)),
+            padding: EdgeInsets.symmetric(horizontal: 22),
+            child: Row(
+              children: [
+                Expanded(
+                    child: TextField(
+                  controller: searchtextedit,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Search Friend Name",
+                      hintStyle: TextStyle(color: Colors.white54)),
+                )),
+
+                // padding: EdgeInsets.symmetric(horizontal: 2),
+                Container(
+                  child: IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      searchinitiate();
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          searchList()
+        ],
+      )),
+    );
+  }
+}
+
+class SearchTile extends StatelessWidget {
+  final String userName;
+  final String userEmail;
+  SearchTile({this.userName, this.userEmail});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          ),
+          Column(
+            children: [
+              Text(userName),
+              SizedBox(
+                height: 2,
+              ),
+              Text(userEmail)
+            ],
+          ),
+          Spacer(),
+          GestureDetector(
+            onTap: () {},
+          ),
+          Container(
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.message_outlined),
+            ),
+          )
+          /*  Container(
+            child: RaisedButton(
+              onPressed: () {
+                createroomstartchat(userName: userName);
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => Chatscreen()));
+              },
+              child: Column(
+                children: [Icon(Icons.message), Text("Message")],
+              ),
+            ),
+          )*/
+        ],
+      ),
+    );
+  }
+}
+
+/*getChatRoomId(String a, String b) {
+  if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
+    return "$b\_$a";
+  } else {
+    return "$a\_$b";
+  }
+}*/
