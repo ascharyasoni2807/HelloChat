@@ -1,22 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:hello/modules/user.dart';
 
 class Authmethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  User _userFromFirebaseUser(FirebaseUser user) {
+// ignore: deprecated_member_use
+  Userr _userFromFirebaseUser(FirebaseUser user) {
     return user != null
-        ? User(
+        ? Userr(
             userId: user.uid,
           )
         : null;
   }
 
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
+  Future signInWithEmailAndPassword(String email, String password) async {
     try {
-      AuthResult result = await _auth.signInWithEmailAndPassword(
+      final UserCredential users = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      FirebaseUser firebaseUser = result.user;
+      // ignore: deprecated_member_use
+      FirebaseUser firebaseUser = users.user;
       return _userFromFirebaseUser(firebaseUser);
     } catch (e) {
       print(e);
@@ -25,16 +27,17 @@ class Authmethods {
 
   Future signUpWithWmailAndPassword(String email, String password) async {
     try {
-      AuthResult result = await _auth.createUserWithEmailAndPassword(
+      UserCredential users = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      FirebaseUser firebaseUser = result.user;
+      // ignore: deprecated_member_use
+      FirebaseUser firebaseUser = users.user;
       return _userFromFirebaseUser(firebaseUser);
     } catch (e) {
       print(e.toString());
     }
   }
 
-  Future reseyPass(String email) async {
+  Future resetPass(String email) async {
     try {
       return await _auth.sendPasswordResetEmail(email: email);
     } catch (e) {

@@ -1,6 +1,0 @@
-class Databasemethod(){
- 
- getUserByUsername{String }
- 
-
-}

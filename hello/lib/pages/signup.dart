@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hello/pages/appbar.dart';
+import 'package:hello/pages/chatroom.dart';
 import 'package:hello/pages/sigin.dart';
 import 'package:hello/services/auth.dart';
-import 'package:hello/pages/chatroom.dart';
+import 'package:hello/services/database.dart';
+//import 'package:hello/pages/chatroom.dart';
+import 'package:hello/navigation/sharedpref.dart';
+//import 'package:collection/collection.dart';
+//import 'package:path/path.dart';
 
 class SignUP extends StatefulWidget {
   @override
@@ -13,16 +18,25 @@ class _SignUPState extends State<SignUP> {
   bool isLoading = false;
 
   Authmethods _authmethods = new Authmethods();
-
+  DatabaseMethods databaseMethods = new DatabaseMethods();
+  HelperFunctions helperFunctions = new HelperFunctions();
   final formkey = GlobalKey<FormState>();
+  // var fs = FirebaseFirestore.instance;
 
   TextEditingController userNameTextEditingController =
       new TextEditingController();
   TextEditingController emailTextEditing = new TextEditingController();
   TextEditingController passwordTextEditing = new TextEditingController();
-
+  TextEditingController confirmpasswordtext = new TextEditingController();
   signselfUP() {
     if (formkey.currentState.validate()) {
+      Map<String, String> userInfoMap = {
+        "name": userNameTextEditingController.text,
+        "email": emailTextEditing.text
+      };
+
+      //HelperFunctions.sharedPreferenceUserLoggedInKey
+
       setState(() {
         isLoading = true;
       });
@@ -30,8 +44,13 @@ class _SignUPState extends State<SignUP> {
           .signUpWithWmailAndPassword(
               emailTextEditing.text, passwordTextEditing.text)
           .then((value) {
-        print(value);
-
+        // uploaduserinfo(userInfoMap);
+        HelperFunctions.saveUserEmailSharedPreference(emailTextEditing.text);
+        HelperFunctions.saveUserNameSharedPreference(
+            userNameTextEditingController.text);
+        databaseMethods.uploadUserInfo(userInfoMap);
+        HelperFunctions.saveUserLoggedInSharedPreference(true);
+        Navigator.of(context).pushReplacementNamed('/signup');
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => ChatRoom()));
       });
@@ -101,6 +120,19 @@ class _SignUPState extends State<SignUP> {
                                   'Enter password', 'Password'),
                               // keyboardType: TextInputType.emailAddress,
                             ),
+                            TextFormField(
+                              obscureText: true,
+                              validator: (value) {
+                                return passwordTextEditing.text ==
+                                        confirmpasswordtext.text
+                                    ? null
+                                    : 'password dint match';
+                              },
+                              controller: confirmpasswordtext,
+                              decoration: textFieldDecoration(
+                                  'Confirm password', 'Password'),
+                              // keyboardType: TextInputType.emailAddress,
+                            ),
                           ],
                         ),
                       ),
@@ -133,21 +165,21 @@ class _SignUPState extends State<SignUP> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 2),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        // padding: EdgeInsets.symmetric(vertical: 10),
-                        child: RaisedButton(
-                          child: Text('Sign Up With Google'),
-                          onPressed: () {
-                            print("loged in seccesfully");
-                          },
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          color: Colors.blueGrey,
-                          textColor: Colors.white,
-                        ),
-                      ),
+                      // SizedBox(height: 2),
+                      // Container(
+                      //   width: MediaQuery.of(context).size.width,
+                      //   // padding: EdgeInsets.symmetric(vertical: 10),
+                      //   child: RaisedButton(
+                      //     child: Text('Sign Up With Google'),
+                      //     onPressed: () {
+                      //       print("loged in seccesfully");
+                      //     },
+                      //     shape: RoundedRectangleBorder(
+                      //         borderRadius: BorderRadius.circular(30)),
+                      //     color: Colors.blueGrey,
+                      //     textColor: Colors.white,
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 10,
                       ),
