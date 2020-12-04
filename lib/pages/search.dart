@@ -64,6 +64,10 @@ class _SearchscreenState extends State<Searchscreen> {
       };
 
       databaseMethods.createChatroom(chatroomId, chatRoomMap);
+      // CircularProgressIndicator(
+      //     backgroundColor: Colors.white,
+      //     strokeWidth: 5,
+      //     valueColor: new AlwaysStoppedAnimation<Color>(Colors.brown));
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -105,6 +109,30 @@ class _SearchscreenState extends State<Searchscreen> {
               createroomstartchat(userName: userName);
               print('insearch');
               print(chatroomId);
+              showLoaderDialog(BuildContext context) {
+                AlertDialog alert = AlertDialog(
+                  content: new Row(
+                    children: [
+                      CircularProgressIndicator(),
+                      Container(
+                          margin: EdgeInsets.only(left: 7),
+                          child: Text("Loading...")),
+                    ],
+                  ),
+                );
+                showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return alert;
+                  },
+                );
+              }
+
+              // CircularProgressIndicator(
+              //     backgroundColor: Colors.white,
+              //     strokeWidth: 5,
+              //     valueColor: new AlwaysStoppedAnimation<Color>(Colors.brown));
 
               // createroomstartchat(userName: userName);
               Navigator.push(
@@ -171,6 +199,11 @@ class _SearchscreenState extends State<Searchscreen> {
                     icon: Icon(Icons.search),
                     onPressed: () {
                       searchinitiate();
+                      // CircularProgressIndicator(
+                      //     backgroundColor: Colors.white,
+                      //     strokeWidth: 5,
+                      //     valueColor:
+                      //         new AlwaysStoppedAnimation<Color>(Colors.brown));
                     })
               ],
             ),

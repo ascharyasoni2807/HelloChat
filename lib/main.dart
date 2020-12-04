@@ -44,13 +44,6 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        // initialRoute: "/signup",
-        // routes: {
-        //   //  "/": (context) => SignIn(),
-        //   "/signup": (context) => SignUP(),
-        //   "/chatroom": (context) => ChatRoom(),
-        //   "/chatscreen": (context) => Chatscreen(),
-        // },
         home: userIsLoggedIn ? ChatRoom() : Authenticate());
   }
 }

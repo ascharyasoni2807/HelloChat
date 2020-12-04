@@ -149,6 +149,11 @@ class _SignInState extends State<SignIn> {
                           child: RaisedButton(
                             child: Text('Sign In'),
                             onPressed: () async {
+                              // CircularProgressIndicator(
+                              //     backgroundColor: Colors.white,
+                              //     strokeWidth: 5,
+                              //     valueColor: new AlwaysStoppedAnimation<Color>(
+                              //         Colors.brown));
                               signIn();
                               print("loged in seccesfully");
                             },
