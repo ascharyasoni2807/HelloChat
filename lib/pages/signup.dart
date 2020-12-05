@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello/pages/appbar.dart';
+import 'package:hello/pages/designs.dart';
 import 'package:hello/pages/chatroom.dart';
 import 'package:hello/pages/sigin.dart';
 import 'package:hello/services/auth.dart';
@@ -65,6 +65,7 @@ class _SignUPState extends State<SignUP> {
           ? Container(child: Center(child: CircularProgressIndicator()))
           : SingleChildScrollView(
               child: Container(
+                color: Colors.brown,
                 height: MediaQuery.of(context).size.height - 50,
                 alignment: Alignment.center,
                 child: Container(
@@ -141,7 +142,13 @@ class _SignUPState extends State<SignUP> {
                         child: Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 6),
-                            child: Text("Forgot Password?")),
+                            child: Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )),
                       ),
                       SizedBox(
                         height: 10,
@@ -159,7 +166,7 @@ class _SignUPState extends State<SignUP> {
                               },
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
-                              color: Colors.blueGrey,
+                              color: Colors.brown[800],
                               textColor: Colors.white,
                             ),
                           ],
@@ -188,11 +195,17 @@ class _SignUPState extends State<SignUP> {
                         children: [
                           Text(
                             "Already have an account? ",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                           InkWell(
                             child: Text(
                               " Sign In Now",
                               style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
                                   decoration: TextDecoration.underline),
                             ),
                             onTap: () {

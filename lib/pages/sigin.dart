@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hello/pages/appbar.dart';
+import 'package:hello/pages/designs.dart';
 import 'package:hello/pages/chatroom.dart';
 import 'package:hello/pages/signup.dart';
 import 'package:hello/services/auth.dart';
@@ -79,6 +79,7 @@ class _SignInState extends State<SignIn> {
               child: Center(child: CircularProgressIndicator()),
             )
           : Container(
+              color: Colors.brown,
               child: SingleChildScrollView(
                 child: Container(
                   height: MediaQuery.of(context).size.height - 50,
@@ -138,7 +139,10 @@ class _SignInState extends State<SignIn> {
                           child: Container(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 8),
-                              child: Text("Forgot Password?")),
+                              child: Text("Forgot Password?",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600))),
                         ),
                         SizedBox(
                           height: 10,
@@ -147,7 +151,10 @@ class _SignInState extends State<SignIn> {
                           width: MediaQuery.of(context).size.width,
                           // padding: EdgeInsets.symmetric(vertical: 10),
                           child: RaisedButton(
-                            child: Text('Sign In'),
+                            child: Text(
+                              'Sign In',
+                              style: TextStyle(fontSize: 16),
+                            ),
                             onPressed: () async {
                               // CircularProgressIndicator(
                               //     backgroundColor: Colors.white,
@@ -159,7 +166,7 @@ class _SignInState extends State<SignIn> {
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
-                            color: Colors.blueGrey,
+                            color: Colors.brown[800],
                             textColor: Colors.white,
                           ),
                         ),
@@ -168,7 +175,8 @@ class _SignInState extends State<SignIn> {
                           width: MediaQuery.of(context).size.width,
                           // padding: EdgeInsets.symmetric(vertical: 10),
                           child: RaisedButton(
-                            child: Text('Sign In With Google'),
+                            child: Text('Sign In With Google',
+                                style: TextStyle(fontSize: 16)),
                             onPressed: () {
                               databasesGoogleMethods
                                   .signInWithGoogle()
@@ -184,7 +192,7 @@ class _SignInState extends State<SignIn> {
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
-                            color: Colors.blueGrey,
+                            color: Colors.brown[800],
                             textColor: Colors.white,
                           ),
                         ),
@@ -196,6 +204,8 @@ class _SignInState extends State<SignIn> {
                           children: [
                             Text(
                               "Dont have an account?",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w600),
                             ),
 
                             //  padding: EdgeInsets.symmetric(vertical: 8),
@@ -203,6 +213,8 @@ class _SignInState extends State<SignIn> {
                               child: Text(
                                 " Register Now",
                                 style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
                                     decoration: TextDecoration.underline),
                               ),
                               onTap: () {
