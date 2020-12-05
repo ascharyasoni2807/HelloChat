@@ -1,3 +1,5 @@
+//import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseMethods {
@@ -44,10 +46,22 @@ class DatabaseMethods {
   }
 
   getConvoMessage(String chatroomId) async {
-    return FirebaseFirestore.instance
+    return await FirebaseFirestore.instance
         .collection("ChatRoom")
         .doc(chatroomId)
         .collection("chats")
+        .orderBy("time", descending: false)
+        .snapshots();
+    // .then(
+    //     (QuerySnapshot querySnapshot) => querySnapshot.docs.forEach((doc) {
+    //           print((doc["message"]));
+    //         }));
+  }
+
+  getchatRrooms(String userName) async {
+    return await FirebaseFirestore.instance
+        .collection("ChatRoom")
+        .where("users", arrayContains: userName)
         .snapshots();
   }
 }

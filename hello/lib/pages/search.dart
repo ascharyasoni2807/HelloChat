@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hello/navigation/sharedpref.dart';
-import 'package:hello/pages/appbar.dart';
+import 'package:hello/pages/designs.dart';
 import 'package:hello/services/database.dart';
 import 'package:hello/pages/chatscreen.dart';
 import 'package:hello/navigation/savedata.dart';
@@ -28,7 +28,8 @@ class _SearchscreenState extends State<Searchscreen> {
             // padding:,
             itemBuilder: (context, index) {
               return Container(
-                padding: EdgeInsets.symmetric(vertical: 2),
+                color: Colors.brown[800],
+                padding: EdgeInsets.symmetric(vertical: 4),
                 child: SearchTile(
                   userName: searchSnapshot.docs[index].data()["name"],
                   userEmail: searchSnapshot.docs[index].data()["email"],
@@ -80,7 +81,6 @@ class _SearchscreenState extends State<Searchscreen> {
 
   Widget SearchTile({String userName, String userEmail}) {
     return Container(
-      color: Colors.white24,
       child: Row(
         children: [
           SizedBox(height: 10),
@@ -88,11 +88,14 @@ class _SearchscreenState extends State<Searchscreen> {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: [
-                Text(userName),
+                Text(
+                  userName,
+                  style: TextStyle(color: Colors.white),
+                ),
                 SizedBox(
                   height: 2,
                 ),
-                Text(userEmail)
+                Text(userEmail, style: TextStyle(color: Colors.white))
               ],
             ),
           ),
@@ -104,52 +107,45 @@ class _SearchscreenState extends State<Searchscreen> {
             ),
           )*/
           GestureDetector(
-            onTap: () {
-              print(userName);
-              createroomstartchat(userName: userName);
-              print('insearch');
-              print(chatroomId);
-              showLoaderDialog(BuildContext context) {
-                AlertDialog alert = AlertDialog(
-                  content: new Row(
-                    children: [
-                      CircularProgressIndicator(),
-                      Container(
-                          margin: EdgeInsets.only(left: 7),
-                          child: Text("Loading...")),
-                    ],
-                  ),
-                );
-                showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return alert;
-                  },
-                );
-              }
+              onTap: () {
+                print(userName);
+                createroomstartchat(userName: userName);
+                print('insearch');
+                print(chatroomId);
+                showLoaderDialog(BuildContext context) {
+                  AlertDialog alert = AlertDialog(
+                    content: new Row(
+                      children: [
+                        CircularProgressIndicator(),
+                        Container(
+                            margin: EdgeInsets.only(left: 7),
+                            child: Text("Loading...")),
+                      ],
+                    ),
+                  );
+                  showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return alert;
+                    },
+                  );
+                }
 
-              // CircularProgressIndicator(
-              //     backgroundColor: Colors.white,
-              //     strokeWidth: 5,
-              //     valueColor: new AlwaysStoppedAnimation<Color>(Colors.brown));
-
-              // createroomstartchat(userName: userName);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Chatscreen(chatroomId)));
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(24)),
-              child: Text(
-                'Message',
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
-            ),
-          )
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Chatscreen(chatroomId)));
+              },
+              child: Container(
+                height: 16,
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+                //color: Colors.brown, borderRadius: BorderRadius.circular(30)),
+                child: Icon(
+                  Icons.message,
+                  color: Colors.white,
+                ),
+              )),
         ],
       ),
     );
@@ -172,45 +168,52 @@ class _SearchscreenState extends State<Searchscreen> {
     return Scaffold(
       appBar: appBarMain(context),
       body: Container(
+          color: Colors.brown,
           child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 5,
-          ),
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.white12,
-                border: Border.all(color: Colors.white),
-                borderRadius: BorderRadius.circular(20)),
-            padding: EdgeInsets.symmetric(horizontal: 22),
-            child: Row(
-              children: [
-                Expanded(
-                    child: TextField(
-                  controller: searchtextedit,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Search Friend Name",
-                      hintStyle: TextStyle(color: Colors.white54)),
-                )),
-                Spacer(),
-                // padding: EdgeInsets.symmetric(horizontal: 2),
-                IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {
-                      searchinitiate();
-                      // CircularProgressIndicator(
-                      //     backgroundColor: Colors.white,
-                      //     strokeWidth: 5,
-                      //     valueColor:
-                      //         new AlwaysStoppedAnimation<Color>(Colors.brown));
-                    })
-              ],
-            ),
-          ),
-          searchList(),
-        ],
-      )),
+            children: <Widget>[
+              SizedBox(
+                height: 5,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.white12,
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(20)),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 22,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: TextField(
+                      controller: searchtextedit,
+                      decoration: InputDecoration(
+                          fillColor: Colors.brown[800],
+                          border: InputBorder.none,
+                          hintText: "Search Friend Name",
+                          hintStyle: TextStyle(color: Colors.white)),
+                    )),
+                    Spacer(),
+                    // padding: EdgeInsets.symmetric(horizontal: 2),
+                    IconButton(
+                        icon: Icon(Icons.search),
+                        onPressed: () {
+                          searchinitiate();
+                          // CircularProgressIndicator(
+                          //     backgroundColor: Colors.white,
+                          //     strokeWidth: 5,
+                          //     valueColor:
+                          //         new AlwaysStoppedAnimation<Color>(Colors.brown));
+                        })
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              searchList(),
+            ],
+          )),
     );
   }
 
