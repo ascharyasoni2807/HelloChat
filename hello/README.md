@@ -2,6 +2,19 @@
 
 A new Flutter project.
 
+
+
+Go through this link for Demo of the project--
+
+
+
+
+Has been integrated with  -  Firebase(cloud firestore ,  real time data base , google sign in ,  normal Authentication sign in .. etc )
+
+
+
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
