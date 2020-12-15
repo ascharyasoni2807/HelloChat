@@ -9,6 +9,7 @@ import 'package:hello/pages/sigin.dart';
 import 'package:hello/pages/signup.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,15 +28,18 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     getLoggedinState();
+
     super.initState();
   }
 
   getLoggedinState() async {
     await HelperFunctions.getUserLoggedInSharedPreference().then((value) {
       setState(() {
-        userIsLoggedIn = value;
         print(value);
+        print("batao");
+        userIsLoggedIn = value;
       });
+      //   userIsLoggedIn = value;
     });
   }
 

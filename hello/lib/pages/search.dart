@@ -100,37 +100,31 @@ class _SearchscreenState extends State<Searchscreen> {
             ),
           ),
           Spacer(),
-          /* Container(
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.message_outlined),
-            ),
-          )*/
           GestureDetector(
               onTap: () {
                 print(userName);
                 createroomstartchat(userName: userName);
                 print('insearch');
                 print(chatroomId);
-                showLoaderDialog(BuildContext context) {
-                  AlertDialog alert = AlertDialog(
-                    content: new Row(
-                      children: [
-                        CircularProgressIndicator(),
-                        Container(
-                            margin: EdgeInsets.only(left: 7),
-                            child: Text("Loading...")),
-                      ],
-                    ),
-                  );
-                  showDialog(
-                    barrierDismissible: false,
-                    context: context,
-                    builder: (BuildContext context) {
-                      return alert;
-                    },
-                  );
-                }
+                // showLoaderDialog(BuildContext context) {
+                //   AlertDialog alert = AlertDialog(
+                //     content: new Row(
+                //       children: [
+                //         CircularProgressIndicator(),
+                //         Container(
+                //             margin: EdgeInsets.only(left: 7),
+                //             child: Text("Loading...")),
+                //       ],
+                //     ),
+                //   );
+                //   showDialog(
+                //     barrierDismissible: false,
+                //     context: context,
+                //     builder: (BuildContext context) {
+                //       return alert;
+                //     },
+                //   );
+                // }
 
                 Navigator.push(
                     context,
@@ -138,12 +132,16 @@ class _SearchscreenState extends State<Searchscreen> {
                         builder: (context) => Chatscreen(chatroomId)));
               },
               child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.brown,
+                    borderRadius: BorderRadius.all(Radius.circular(60))),
                 height: 16,
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-                //color: Colors.brown, borderRadius: BorderRadius.circular(30)),
-                child: Icon(
-                  Icons.message,
-                  color: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 18, vertical: 0),
+                // color: Colors.brown,
+                //    ,
+                child: Text(
+                  "message",
+                  style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
               )),
         ],

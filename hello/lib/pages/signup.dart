@@ -50,7 +50,7 @@ class _SignUPState extends State<SignUP> {
             userNameTextEditingController.text);
         databaseMethods.uploadUserInfo(userInfoMap);
         HelperFunctions.saveUserLoggedInSharedPreference(true);
-        Navigator.of(context).pushReplacementNamed('/signup');
+        //    Navigator.of(context).pushReplacementNamed('/signup');
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => ChatRoom()));
       });
