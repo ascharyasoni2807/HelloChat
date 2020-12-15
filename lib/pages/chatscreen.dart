@@ -91,7 +91,7 @@ class _ChatscreenState extends State<Chatscreen> {
                           controller: messagetext,
                           decoration: InputDecoration(
                               fillColor: Colors.brown,
-                              //border: OutlineInputBorder(
+
                               //  borderRadius: BorderRadius.circular(10)),
                               hintText: "Type Message",
                               hintStyle: TextStyle(color: Colors.white)),
